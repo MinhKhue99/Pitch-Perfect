@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject private var audiomanager = AudioManager()
+    @State private var isNavigate = false
     var body: some View {
         NavigationStack {
             VStack {
@@ -27,19 +28,21 @@ struct ContentView: View {
                 
                 Button(action: {
                     self.audiomanager.stopRecording()
+                    isNavigate = !audiomanager.isRecording
                 }, label: {
-                    NavigationLink(destination: PlayBackView()) {
-                        Image(audiomanager.isRecording ? "Stop" : "Record")
-                            .resizable()
-                            .frame(width: 60, height: 60)
-                            .contrast(audiomanager.isRecording ? 1.0 : 0.3)
-                    }
+                    Image(audiomanager.isRecording ? "Stop" : "Record")
+                        .resizable()
+                        .frame(width: 60, height: 60)
+                        .contrast(audiomanager.isRecording ? 1.0 : 0.3)
                 })
-                .disabled(!audiomanager.isRecording)
                 
             }
+            .navigationDestination(isPresented: $isNavigate, destination: {
+                PlayBackView()
+            })
             .padding()
         }
+        .padding()
     }
 }
 

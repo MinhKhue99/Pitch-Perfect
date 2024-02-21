@@ -17,6 +17,7 @@ struct PlayBackView: View {
                         self.audiomanager.playSound(rate: 0.5)
                     }, label: {
                         Image("Slow")
+                            .contrast(audiomanager.isPlaying ? 0.3 : 1.0)
                     })
                     .disabled(audiomanager.isPlaying)
                    
@@ -25,6 +26,7 @@ struct PlayBackView: View {
                         self.audiomanager.playSound(rate: 2.0)
                     }, label: {
                         Image("Fast")
+                            .contrast(audiomanager.isPlaying ? 0.3 : 1.0)
                     })
                     .disabled(audiomanager.isPlaying)
                 }
@@ -35,6 +37,7 @@ struct PlayBackView: View {
                         self.audiomanager.playSound(rate: 1000)
                     }, label: {
                         Image("HighPitch")
+                            .contrast(audiomanager.isPlaying ? 0.3 : 1.0)
                     })
                     .disabled(audiomanager.isPlaying)
                     
@@ -43,6 +46,7 @@ struct PlayBackView: View {
                         self.audiomanager.playSound(rate: -1000)
                     }, label: {
                         Image("LowPitch")
+                            .contrast(audiomanager.isPlaying ? 0.3 : 1.0)
                     })
                     .disabled(audiomanager.isPlaying)
                     
@@ -54,6 +58,7 @@ struct PlayBackView: View {
                         self.audiomanager.playSound(echo: true)
                     }, label: {
                         Image("Echo")
+                            .contrast(audiomanager.isPlaying ? 0.3 : 1.0)
                     })
                     .disabled(audiomanager.isPlaying)
                     
@@ -62,6 +67,7 @@ struct PlayBackView: View {
                         self.audiomanager.playSound(reverb: true)
                     }, label: {
                         Image("Reverb")
+                            .contrast(audiomanager.isPlaying ? 0.3 : 1.0)
                     })
                     .disabled(audiomanager.isPlaying)
                     
@@ -74,7 +80,9 @@ struct PlayBackView: View {
                     Image("Stop")
                         .resizable()
                         .frame(width: 60, height: 60)
+                        .contrast(audiomanager.isPlaying ? 1.0 : 0.3)
                 })
+                .disabled(!audiomanager.isPlaying)
             }
             .padding()
         }
